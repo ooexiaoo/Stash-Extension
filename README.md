@@ -5,7 +5,7 @@
 
 📌 Save links from anywhere on the web directly to your Stashed.in boards with just one click.
 
-![Extension Preview](.github/screenshots/preview.png)
+![Extension Preview](src/Extension Preview.webp)
 
 ## Features
 
