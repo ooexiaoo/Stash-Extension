@@ -1,7 +1,7 @@
 # Stashed.in Browser Extension
 
-[![Release](https://img.shields.io/github/v/release/stashed-in/stashlist-extension?style=flat-square)](https://github.com/stashed-in/stashlist-extension/releases/latest)
-[![License](https://img.shields.io/github/license/stashed-in/stashlist-extension?style=flat-square)](https://github.com/stashed-in/stashlist-extension/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/v/release/ooexiaoo/Stash-Extension?style=flat-square)](https://github.com/ooexiaoo/Stash-Extension/releases/latest)
+[![License](https://img.shields.io/github/license/ooexiaoo/Stash-Extension?style=flat-square)](https://github.com/ooexiaoo/Stash-Extension/blob/main/LICENSE)
 
 📌 Save links from anywhere on the web directly to your Stashed.in boards with just one click.
 
@@ -20,7 +20,7 @@
 ## Download
 
 ### Chrome & Chromium-based Browsers
-Download the latest release from our [Releases Page](https://github.com/stashed-in/stashlist-extension/releases/latest) and install manually:
+Download the latest release from our [Releases Page](https://github.com/ooexiaoo/Stash-Extension/releases/latest) and install manually:
 1. Download `stashlist-extension.zip` from the latest release
 2. Extract the ZIP file
 3. Open Chrome and go to `chrome://extensions`
@@ -29,7 +29,7 @@ Download the latest release from our [Releases Page](https://github.com/stashed-
 6. Select the extracted folder
 
 ### Firefox
-Coming soon to Firefox Add-ons store! For now, download from [Releases](https://github.com/stashed-in/stashlist-extension/releases/latest) and install temporarily:
+Coming soon to Firefox Add-ons store! For now, download from [Releases](https://github.com/ooexiaoo/Stash-Extension/releases/latest) and install temporarily:
 1. Download `stashlist-extension.zip`
 2. Extract the ZIP file
 3. Open Firefox and go to `about:debugging#/runtime/this-firefox`
@@ -226,9 +226,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Links
 
 - [Stashed.in](https://stashed.in) - Main website
-- [Report Bug](https://github.com/stashed-in/stashlist-extension/issues)
-- [Request Feature](https://github.com/stashed-in/stashlist-extension/issues)
-- [Changelog](https://github.com/stashed-in/stashlist-extension/releases)
+- [Report Bug](https://github.com/ooexiaoo/Stash-Extension/issues)
+- [Request Feature](https://github.com/ooexiaoo/Stash-Extension/issues)
+- [Changelog](https://github.com/ooexiaoo/Stash-Extension/releases)
 
 ---
 
