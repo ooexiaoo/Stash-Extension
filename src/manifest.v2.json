@@ -8,13 +8,15 @@
       "id": "extension@stashed.in",
       "strict_min_version": "109.0",
       "data_collection_permissions": {
-        "dataInTransit": {
-          "authentication": "User authentication tokens for Stashed.in API",
-          "websiteData": "URLs, titles, descriptions, and images from webpages being saved"
-        },
-        "dataAtRest": {
-          "authentication": "API tokens stored locally in browser storage",
-          "userContent": "Saved link data cached temporarily in browser storage"
+        "required": {
+          "dataInTransit": {
+            "authentication": "User authentication tokens for Stashed.in API",
+            "websiteData": "URLs, titles, descriptions, and images from webpages being saved"
+          },
+          "dataAtRest": {
+            "authentication": "API tokens stored locally in browser storage",
+            "userContent": "Saved link data cached temporarily in browser storage"
+          }
         }
       }
     },
