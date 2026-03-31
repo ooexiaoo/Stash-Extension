@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save to Stashed.in</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <button type="button" id="settings-header-btn" class="settings-header-btn" aria-label="Settings" title="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+      <h1>📌 Save to Stashed.in</h1>
+      <p>Quickly save links to your stashes</p>
+    </div>
+
+    <div class="status" id="status">
+      Loading...
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <form id="link-form" style="display: none;">
+      <div class="form-group">
+        <label for="board-combobox">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -2px;">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+          Select Board
+        </label>
+        <div class="combobox-container">
+          <div class="combobox-input-wrapper" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+            <input 
+              type="text" 
+              id="board-combobox" 
+              class="combobox-input"
+              placeholder="Search or select a board..."
+              autocomplete="off"
+              readonly
+            />
+            <button type="button" class="combobox-toggle" aria-label="Toggle board list">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+          </div>
+          <div class="combobox-dropdown" role="listbox" id="board-dropdown" style="display: none;">
+            <div class="combobox-search">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input 
+                type="text" 
+                id="board-search" 
+                class="combobox-search-input"
+                placeholder="Search boards..."
+                autocomplete="off"
+              />
+            </div>
+            <div class="combobox-options" id="board-options">
+              <!-- Options will be populated dynamically -->
+            </div>
+            <div class="combobox-empty" id="combobox-empty" style="display: none;">
+              No boards found
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="board-select" required />
+      </div>
+
+      <div class="form-group">
+        <label for="link-url">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -2px;">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          URL
+        </label>
+        <div style="position: relative;">
+          <input type="url" id="link-url" required placeholder="https://example.com">
+          <div id="metadata-loading" class="metadata-loading" style="display: none;">
+            <svg class="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+              <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div id="metadata-status" class="metadata-status"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="link-title">Title</label>
+        <input type="text" id="link-title" placeholder="Page title">
+      </div>
+
+      <div class="form-group">
+        <label for="link-description">Description</label>
+        <textarea id="link-description" rows="3" placeholder="Brief description (optional)"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="link-image">Image URL (optional)</label>
+        <input type="url" id="link-image" placeholder="https://example.com/image.jpg">
+      </div>
+
+      <div class="form-group">
+        <label for="link-tags">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -2px;">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
+          Tags
+        </label>
+        <input type="text" id="link-tags" placeholder="tag1, tag2, tag3">
+        <div class="tag-counter" id="tag-counter">0/5 tags</div>
+        <div id="tag-suggestions" class="tag-suggestions" style="display: none;">
+          <div class="tag-suggestions-title">Suggested from board:</div>
+          <div class="tag-suggestions-list" id="tag-suggestions-list"></div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" id="save-btn" class="primary-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/>
+            <polyline points="7 3 7 8 15 8"/>
+          </svg>
+          Save Link
+        </button>
+        <button type="button" id="cancel-btn" class="secondary-btn">Cancel</button>
+      </div>
+    </form>
+
+    <div class="auth-section" id="auth-section" style="display: none;">
+      <div style="padding: 20px 0;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--gray-400); margin: 0 auto 16px; display: block;">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <p style="margin-bottom: 20px; font-size: 14px; line-height: 1.5;">
+          Authenticate to save links to your Stashed.in boards
+        </p>
+        
+        <div style="background: linear-gradient(135deg, var(--gray-50), var(--gray-100)); border: 1px solid var(--gray-200); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+          <h4 style="margin: 0 0 12px 0; font-size: 13px; font-weight: 700; color: var(--gray-900); display: flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            How to Authenticate
+          </h4>
+          <ol style="margin: 0 0 12px 0; padding-left: 20px; font-size: 12px; color: var(--gray-700); line-height: 1.8;">
+            <li>Click <strong>Extension Settings</strong> below</li>
+            <li>Follow the step-by-step setup guide</li>
+            <li>Generate API token from Edit Profile</li>
+            <li>Paste token to complete setup</li>
+          </ol>
+        </div>
+        
+        <button id="login-btn" class="primary-btn" style="margin-bottom: 10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Log In to Stashed.in
+        </button>
+        
+        <button id="settings-btn" class="secondary-btn" style="width: 100%; margin-bottom: 12px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          Extension Settings
+        </button>
+        
+        <p style="margin-top: 16px; font-size: 11px; color: var(--gray-500); text-align: center; line-height: 1.5;">
+          <strong>Note:</strong> Simply logging in is not enough. You need to generate an API token from your Edit Profile page and paste it in the Extension Settings.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "stashlist-extension",
+  "version": "1.0.0",
+  "description": "Browser extension for StashList",
+  "main": "background.js",
+  "scripts": {
+    "build": "npm run build:chrome && npm run build:firefox",
+    "build:chrome": "cd src && zip -r ../stashlist-extension-chrome.zip *",
+    "build:firefox": "cd src && cp manifest.v2.json manifest.json && zip -r ../stashlist-extension-firefox.zip * && git checkout manifest.json",
+    "dev": "echo 'Load the src directory as an unpacked extension in developer mode'",
+    "zip": "cd src && zip -r ../stashlist-extension.zip . -x '.*' '__MACOSX' '__MACOSX/*' '*.DS_Store'"
+  },
+  "keywords": ["stashlist", "browser-extension", "productivity"],
+  "author": "StashList",
+  "license": "MIT"
+}

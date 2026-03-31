@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stashed.in Extension Settings</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="settings-container">
+    <div class="settings-card">
+      <div class="settings-header">
+        <h1>📌 Stashed.in Extension</h1>
+        <p>Save links from anywhere on the web</p>
+      </div>
+
+      <div class="settings-content">
+        <!-- Authentication Status Section -->
+        <div class="section" id="auth-section">
+          <h2 class="section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Authentication Status
+          </h2>
+          
+          <div id="auth-status">
+            <!-- Status will be shown here -->
+          </div>
+
+          <div id="auth-buttons" class="button-group" style="display: none;">
+            <button id="login-btn" class="primary-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10 17 15 12 10 7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+              </svg>
+              Log In to Stashed.in
+            </button>
+            <button id="check-auth-btn" class="secondary-btn">Check Status</button>
+          </div>
+        </div>
+
+        <!-- Current Token Section (shown when authenticated) -->
+        <div id="current-token-section" style="display: none;">
+          <div class="section">
+            <h2 class="section-title" style="color: var(--success);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Connected
+            </h2>
+            
+            <div class="token-display-wrapper">
+              <input type="password" id="current-token-display" readonly class="token-display" placeholder="No token set">
+              <button id="show-token-btn" class="icon-btn" title="Show/Hide">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+              <button id="copy-token-btn" class="icon-btn" title="Copy">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+              </button>
+            </div>
+            
+            <div class="button-group mt-4">
+              <button id="remove-token-btn" class="danger-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                Disconnect
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manual Token Entry Section -->
+        <div id="setup-section" style="display: none;">
+          <div class="divider"></div>
+          
+          <div class="section">
+            <h2 class="section-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              Manual Token Entry
+            </h2>
+            <p class="section-description">
+              Already have an API token? Paste it below to authenticate the extension.
+            </p>
+
+            <div class="form-group">
+              <label for="auth-token">API Token</label>
+              <textarea 
+                id="auth-token" 
+                rows="2" 
+                placeholder="stk_..." 
+                style="font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace; font-size: 13px;"
+              ></textarea>
+            </div>
+
+            <button id="save-config-btn" class="primary-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Save Token
+            </button>
+          </div>
+        </div>
+
+        <!-- Theme Settings Section -->
+        <div class="divider"></div>
+
+        <div class="section">
+          <h2 class="section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            Appearance
+          </h2>
+          <p class="section-description">
+            Choose how the extension looks. You can auto-detect your system theme or pick a specific one.
+          </p>
+
+          <div class="form-group">
+            <label for="theme-select">Theme</label>
+            <select id="theme-select">
+              <option value="auto">Auto (System)</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+
+          <div class="theme-preview" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+            <div class="theme-preview-item light" style="border: 2px solid var(--gray-200); border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s;" data-theme="light">
+              <div style="background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e5e7eb;">
+                <div style="width: 20px; height: 20px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 4px; margin-bottom: 8px;"></div>
+                <div style="height: 8px; background: #374151; border-radius: 2px; width: 70%; margin-bottom: 4px;"></div>
+                <div style="height: 6px; background: #9ca3af; border-radius: 2px; width: 50%;"></div>
+              </div>
+              <p style="text-align: center; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--gray-700);">Light</p>
+            </div>
+            <div class="theme-preview-item dark" style="border: 2px solid var(--gray-200); border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s;" data-theme="dark">
+              <div style="background: #18181b; border-radius: 8px; padding: 12px; border: 1px solid #3f3f46;">
+                <div style="width: 20px; height: 20px; background: linear-gradient(135deg, #818cf8, #a78bfa); border-radius: 4px; margin-bottom: 8px;"></div>
+                <div style="height: 8px; background: #e4e4e7; border-radius: 2px; width: 70%; margin-bottom: 4px;"></div>
+                <div style="height: 6px; background: #71717a; border-radius: 2px; width: 50%;"></div>
+              </div>
+              <p style="text-align: center; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--gray-700);">Dark</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step-by-step Instructions -->
+        <div class="divider"></div>
+        
+        <div class="section">
+          <div class="instructions-card">
+            <h3 class="instructions-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Setup Instructions
+            </h3>
+            
+            <div class="instruction-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p class="step-title">Log in to Stashed.in</p>
+                <p class="step-description">Click the "Log In to Stashed.in" button above to open the login page in your browser.</p>
+              </div>
+            </div>
+
+            <div class="instruction-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p class="step-title">Go to Edit Profile</p>
+                <p class="step-description">After logging in, navigate to your profile settings by clicking your avatar → Edit Profile.</p>
+                <button id="open-profile-btn" class="secondary-btn text-sm mt-4" style="width: auto; padding: 8px 14px;">
+                  Open Edit Profile →
+                </button>
+              </div>
+            </div>
+
+            <div class="instruction-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p class="step-title">Generate Extension Token</p>
+                <p class="step-description">Scroll to the "Browser Extension Access" section and click "Generate API Token" or "Copy Token".</p>
+              </div>
+            </div>
+
+            <div class="instruction-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p class="step-title">Paste Token Here</p>
+                <p class="step-description">Return to this page and paste your token in the "Manual Token Entry" section above, then click "Save Token".</p>
+              </div>
+            </div>
+
+            <div class="pro-tip">
+              <p>
+                <strong>💡 Pro Tip:</strong> Your extension token is permanent and works across all devices. Unlike browser sessions, it won't expire when you clear cache or switch browsers!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center text-muted text-sm mt-4">
+          <em>Your token is stored locally on this device only and never shared.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
