@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run build:chrome && npm run build:firefox",
     "build:chrome": "cd src && zip -r ../stashlist-extension-chrome.zip *",
-    "build:firefox": "cd src && cp manifest.v2.json manifest.json && zip -r ../stashlist-extension-firefox.zip * && git checkout manifest.json",
+    "build:firefox": "cd firefox && zip -r ../stashlist-extension-firefox.zip *",
     "dev": "echo 'Load the src directory as an unpacked extension in developer mode'",
     "zip": "cd src && zip -r ../stashlist-extension.zip . -x '.*' '__MACOSX' '__MACOSX/*' '*.DS_Store'"
   },

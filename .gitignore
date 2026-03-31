@@ -3,7 +3,12 @@ node_modules/
 
 # Build artifacts
 stashlist-extension.zip
+stashlist-extension-chrome.zip
+stashlist-extension-firefox.zip
 *.zip
+
+# Build folders
+firefox/
 
 # OS files
 .DS_Store
