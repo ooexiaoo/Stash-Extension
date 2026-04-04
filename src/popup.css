@@ -222,6 +222,32 @@
   background: var(--gray-100);
 }
 
+[data-theme="dark"] .danger-btn {
+  background: linear-gradient(135deg, var(--danger), var(--danger-dark));
+  color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .danger-btn:hover {
+  background: linear-gradient(135deg, var(--danger), var(--danger-dark));
+  border: none;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
+}
+
+[data-theme="dark"] .primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .primary-btn:hover {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -325,9 +351,9 @@ label {
 
 input, select, textarea {
   width: 100%;
-  padding: 10px 14px;
+  padding: 10px 16px;
   border: 1.5px solid var(--gray-200);
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 14px;
   background: white;
   box-sizing: border-box;
@@ -349,9 +375,9 @@ input, select, textarea {
 
 .combobox-input {
   width: 100%;
-  padding: 10px 40px 10px 14px;
+  padding: 10px 40px 10px 16px;
   border: 1.5px solid var(--gray-200);
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 14px;
   background: white;
   box-sizing: border-box;
@@ -696,7 +722,7 @@ button {
   flex: 1;
   padding: 11px 18px;
   border: 1.5px solid var(--gray-200);
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -733,7 +759,7 @@ button[type="submit"]:hover {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -752,12 +778,11 @@ button[type="submit"]:hover {
   color: white;
   border: none;
   padding: 12px 20px;
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   width: 100%;
-  margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
   transition: all 0.2s ease;
 }
@@ -776,7 +801,7 @@ button[type="submit"]:hover {
   color: var(--gray-700);
   border: 1.5px solid var(--gray-200);
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -947,8 +972,8 @@ button[type="submit"]:hover {
   background: linear-gradient(135deg, var(--danger), var(--danger-dark));
   color: white;
   border: none;
-  padding: 11px 18px;
-  border-radius: 10px;
+  padding: 12px 20px;
+  border-radius: 9999px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -960,6 +985,10 @@ button[type="submit"]:hover {
 .danger-btn:hover {
   box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
   transform: translateY(-2px);
+}
+
+.danger-btn:active {
+  transform: translateY(0);
 }
 
 .flex {

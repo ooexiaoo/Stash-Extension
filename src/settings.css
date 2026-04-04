@@ -158,8 +158,19 @@
   background: var(--gray-200);
 }
 
-[data-theme="dark"] .text-muted {
-  color: var(--gray-500);
+[data-theme="dark"] .secondary-btn {
+  background: var(--gray-50);
+  color: var(--gray-700);
+  border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .secondary-btn:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+[data-theme="dark"] .theme-preview-item p {
+  color: var(--gray-700) !important;
 }
 
 * {
@@ -395,9 +406,9 @@ label {
 
 input, select, textarea {
   width: 100%;
-  padding: 11px 15px;
+  padding: 11px 16px;
   border: 1.5px solid var(--gray-200);
-  border-radius: 11px;
+  border-radius: 9999px;
   font-size: 14px;
   background: white;
   box-sizing: border-box;
@@ -431,7 +442,7 @@ input:hover, select:hover, textarea:hover {
   padding: 11px 15px;
   background: var(--gray-50);
   border: 1.5px solid var(--gray-200);
-  border-radius: 11px;
+  border-radius: 9999px;
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
   font-size: 12px;
   color: var(--gray-700);
@@ -439,13 +450,14 @@ input:hover, select:hover, textarea:hover {
 }
 
 .icon-btn {
+  flex: none;
   width: 42px;
   height: 42px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 11px;
+  border-radius: 50%;
   background: white;
   border: 1.5px solid var(--gray-200);
   cursor: pointer;
@@ -472,7 +484,7 @@ button {
   flex: 1;
   padding: 12px 20px;
   border: 1.5px solid var(--gray-200);
-  border-radius: 11px;
+  border-radius: 9999px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -512,7 +524,7 @@ button[type="submit"]:hover, .primary-btn:hover {
   color: var(--gray-700);
   border: 1.5px solid var(--gray-200);
   padding: 11px 18px;
-  border-radius: 11px;
+  border-radius: 9999px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -531,7 +543,7 @@ button[type="submit"]:hover, .primary-btn:hover {
   color: white;
   border: none;
   padding: 12px 20px;
-  border-radius: 11px;
+  border-radius: 9999px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
